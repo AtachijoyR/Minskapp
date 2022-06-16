@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from Clinipet.views import ListPets
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('Listar-Mascotas/', ListPets.as_view(), name = "Listar-Mascotas"),
+
 ]
