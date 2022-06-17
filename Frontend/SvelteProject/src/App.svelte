@@ -1,10 +1,47 @@
 <script>
-	export let name;
+	import axios from 'axios';
+	import { Styles } from 'sveltestrap';
+	import {onMount} from 'svelte';
+	import {
+        Alert,
+        Container,
+        Button,
+        Table,
+    } from 'sveltestrap';
+	let Animals = [];
+
+	const getPets= () => {
+		axios.get('http://127.0.0.1:8000/Listar-Mascotas/')
+		.then(res =>{
+			Animals = res.data;
+
+			console.log(res);
+		})
+	}
+
+	onMount(getPets);
+
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<Container>
+	<h1> Svelte Axios </h1>
+	<hr>
+
+	{#await Animals}
+		Loading...
+	{:then Animals}
+		<ul>
+			{#each Animals as animal }
+				<li>{animal.name}</li>
+			{/each}
+
+		</ul>
+	{:catch error}
+		{error}
+	{/await}
+	</Container>
+
 </main>
 
 <style>
