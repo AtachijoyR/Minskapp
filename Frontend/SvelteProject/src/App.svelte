@@ -34,6 +34,9 @@
 		<ul>
 			{#each Animals as animal }
 				<li>{animal.name}</li>
+				<li>{animal.age_months}</li>
+				<li>{animal.specie}</li>
+
 			{/each}
 
 		</ul>
