@@ -16,26 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-#Importando las vistas a utilizar
-from Clinipet.views import (
-    ListPets,
-    FiltrarPets,
-    CrearPets,
-    UpdatePet,
-)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Listar-Mascotas/', ListPets.as_view(), name = "Listar-Mascotas"),
-    path('Buscar-Mascotas/<owner>/', FiltrarPets.as_view(), name = "Buscar-Mascotas"),
-    path('Registrar-Mascotas/', CrearPets.as_view(), name = "Registrar-Mascotas"),
-    path('Actualizar-Mascotas/<pk>/', UpdatePet.as_view(), name = "Actualizar-Mascota"),
 ]
-
-
-
-
-
-
-
-
