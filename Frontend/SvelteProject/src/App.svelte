@@ -1,67 +1,49 @@
 <script>
-	import axios from 'axios';
-	import { Styles } from 'sveltestrap';
-	import {onMount} from 'svelte';
-	import {
-        Alert,
-        Container,
-        Button,
-        Table,
-    } from 'sveltestrap';
-	let Animals = [];
-
-	const getPets= () => {
-		axios.get('http://127.0.0.1:8000/Listar-Mascotas/')
-		.then(res =>{
-			Animals = res.data;
-
-			console.log(res);
-		})
-	}
-
-	onMount(getPets);
-
+    import { Router, Link, Route } from "svelte-routing";
+    import Home from './routes/Home.svelte';
+    import Login from './routes/Login.svelte';
+    import Profile from './routes/Profile.svelte';
 </script>
 
-<main>
-	<Container>
-	<h1> Svelte Axios </h1>
-	<hr>
+<Router>
+    <nav>
+        <div class="left_div">
+            <nav>
+                <Link to="/home"  style="color:#00070F">CliniPet</Link>
+            </nav>
+        </div>
+        
+        <div class="right_div">
+                <nav>
+                    <Link to="/login" style="color:#00070F">Iniciar Sesión</Link>
+                    &nbsp&nbsp;
+                    <Link to="/profile" style="color:#00070F">Perfil</Link>
+                </nav>
+        </div>
+    </nav>
+    <Route path="/home" component={Home}/>
+    <Route path="/login" component={Login}/>
+    <Route path="/profile" component={Profile}/>
+</Router>
 
-	{#await Animals}
-		Loading...
-	{:then Animals}
-		<ul>
-			{#each Animals as animal }
-				<li>{animal.name}</li>
-			{/each}
-
-		</ul>
-	{:catch error}
-		{error}
-	{/await}
-	</Container>
-
-</main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+    nav {
+		display: flex;
 	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	nav div {
+		flex: 1;
+		padding: 1rem;
 	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+    .left_div {
+		text-align: left;
+		background-color: #58e9ffb5;		
+        font-weight: bolder;
+	}
+	.right_div {
+		background-color: rgba(164, 161, 161, 0.292);        
+        max-width: 181px;
+        text-align: right;
+        font-weight: bolder;
 	}
 </style>
