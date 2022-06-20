@@ -20,5 +20,6 @@ class Pet(models.Model):
     status = models.CharField('Estado', max_length=1,choices = pet_choices)
     specie = models.CharField(max_length=50)
     rut_owner = models.CharField(max_length=12)
+    description = models.CharField(max_length=50, blank = True)
     
 
